@@ -6,6 +6,7 @@ import (
     "fmt"
     "github.com/tealeg/xlsx"
     "path/filepath"
+    "time"
 )
 
 func main() {
@@ -68,6 +69,14 @@ func main() {
                 newcell1.Value = "配送"
                 newcell2 := newrow.AddCell()
                 newcell2.Value = "0"
+                //06-11-18 时间格式需要修改一下
+                tm1, _ := time.Parse("01-02-06", row.Cells[1].String())
+                tm2 := fmt.Sprintf(tm1.Format("2006-1-2"))
+                newrow.Cells[1].Value = tm2
+
+                tm3, _ := time.Parse("01-02-06", row.Cells[20].String())
+                tm4 := fmt.Sprintf(tm3.Format("2006-1-2"))
+                newrow.Cells[20].Value = tm4
                 newrow.Cells[3].Value = orderno //更改为加后缀的单号
             }
 
